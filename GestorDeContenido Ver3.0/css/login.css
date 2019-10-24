@@ -1,0 +1,106 @@
+
+.logoLogin {
+	  font-family: Montserrat, sans-serif !important;
+	  font-size: 11px !important;
+	  margin-bottom: 0;
+	  width: 12.5em;
+      height: 12.5em;
+	  border-top-left-radius: 0;
+	  }
+.login {
+  margin:0 auto;
+  max-width:500px;
+}
+.login-header {
+  color:#06F;
+  text-align:center;
+  font-size:100%;
+  font-family: Montserrat, sans-serif;
+}
+/* .login-header h1 {
+   text-shadow: 0px 5px 15px #000; 
+}*/
+.login-form {
+  border:.5px solid #fff;
+   border-color: transparent;
+ /* border-radius:10px;
+  box-shadow:0px 0px 10px #000;*/
+}
+.login-form h3 {
+  text-align:left;
+  margin-left:30px;
+  color:#333;
+  letter-spacing: 1px !important;
+}
+.login-form {
+  box-sizing:border-box;
+  padding-top:15px;
+  padding-bottom:10%;
+  margin:5% auto;
+  text-align:center;
+}
+.login input[type="text"],
+.login input[type="password"] {
+  max-width:400px;
+  width: 70%;
+  line-height:3em;
+  font-family: 'Ubuntu', sans-serif;
+  margin:1em 2em;
+  border-radius:5px;
+  border:2px solid #f2f2f2;
+  outline:none;
+  padding-left:10px;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: #999;
+  background-color:transparent;
+  
+}
+.login input[type="text"]:focus,
+.login input[type="password"]:focus {
+  border-color: #036;
+  color:#333;
+}
+.login-form input[type="button"] {
+  height:30px;
+  width:100px;
+  background:#06F;
+  border:1px solid #f2f2f2;
+ /* border-radius:20px;*/
+  color: #FFF;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+  border-color:#006;
+}
+.login-form input[type="button"]:active {
+	background-color:#009;
+
+}
+.sign-up{
+  color:#06F;
+  margin-left:-70%;
+  cursor:pointer;
+  text-decoration:underline;
+}
+.no-access {
+	color:#F00;	
+}
+
+/*Media Querie*/
+@media only screen and (min-width : 150px) and (max-width : 530px){
+  .login-form h3 {
+    text-align:center;
+    margin:0;
+  }
+  .sign-up {
+    margin:10px 0;
+  }
+  .no-access{
+	  margin:10px 0;
+	  color:#F00; 
+}
+  .login-button {
+    margin-bottom:10px;
+  }
+}

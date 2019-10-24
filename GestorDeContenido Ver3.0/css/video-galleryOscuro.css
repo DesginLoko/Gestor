@@ -1,0 +1,69 @@
+/* CSS Document */
+
+@charset "utf-8";
+ .gallery-div{
+	 width:80% !important;
+	 
+	 }
+
+.inputSearch{
+	
+	border-left:none;
+	border-top:none;
+	border-right:none;
+	background-color:#747474;
+	border-width: 0 0 2px;
+	}
+.inputSearch input[type="text"]:focus{
+	border-left:none;
+	border-top:none;
+	border-right:none;
+	background-color:#383838;
+	border-width: 0 0 0px !important;
+	}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor:pointer;
+  float:right;
+  
+}
+
+.btn {
+  border: 2px solid gray;
+  color: #333;
+  background-color: #E3E3E3;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  width:auto;
+  height:auto;
+}
+.btn:hover{
+	cursor:pointer;
+	}
+.upload-btn-wrapper input[type=file] {
+  cursor:pointer;
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.buscador{
+	width:100%;		
+	
+}
+.glyphicon-search{
+
+	font-size:18px;
+}
+ @media screen and (max-width: 767px) {
+	 
+	 
+	 }
+
+/* CSS Document */
+

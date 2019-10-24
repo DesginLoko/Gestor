@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Prueba index.html -->
+  <title>Plataforma Interactiva</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>    
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>        
+    <script>
+    var paginaActual=1;
+    </script>
+    <script src="../javascript/main.js"></script>
+    <script src="../javascript/video_Functions.js"></script>
+    <script src="../javascript/video_Canvas.js"></script>
+    <script src="../javascript/video_Canvas_Edit.js"></script>
+    <script src="../javascript/multithumb-slider.js"></script>
+    <link rel="stylesheet" name="estiloPrincipal" type="text/css" href="../css/temaPrincipal.css">
+  <link rel="stylesheet" type="text/css" href="../css/video-review.css">
+    <link rel="stylesheet" type="text/css" href="../css/multithumb-slider.css">
+  <!--<script src="../javascript/main.js"></script>-->
+
+  <link rel="icon" href="../imagenes/logoUC.jpg">
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" id="navP">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+            <!--<a class=""><img src="../imagenes/BannerPrima.svg" class="logo" href="#myPage"/></a>-->
+      <a class="" ><img src="../imagenes/Escudo2.svg" class="logo" href="#myPage"/></a>
+      <a class="logo" href="http://www.ucuenca.edu.ec">UNIVERSIDAD DE CUENCA</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="cursos.html"><span class="glyphicon glyphicon-home"></span>INICIO</a></li>
+       <!-- <li><a href="#myVideo1"><span class="glyphicon glyphicon-globe"></span>EXPLORAR</a></li>-->
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="cursos.html"><span name="username" class="glyphicon glyphicon-user"></span></a></li>
+            <li><a><span onclick="cambiarEstilo();" name="modoEstilo" class="glyphicon glyphicon glyphicon-tint">Claro/Oscuro</span></a></li>
+            <li><a onClick="salir();"><span class="glyphicon glyphicon-log-out">Salir</span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- FINDE LA LA BARRA SUPERIOR O CABECERA-->
+
+<div class="container-fluid text-center">
+<br><br>
+        <ul class="breadcrumb">
+            <li id="check-manager-main" class="r2"><a href="#" class="active">Principal</a></li>
+            <li id="check-labels" class="r2"><a href="#">Sugeridas</a></li>
+            <li id="add-modify-labels"class="r2"><a href="#">Personalizar</a></li>
+          <!--  <li id="eliminate-labels"class="r2"><a href="#">Elimintar Todas</a></li>-->
+      </ul>
+</div>
+
+<div class="container-fluid text-center" id="manager-page-main">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <div class="videoDiv">        
+            <video id="video" width="100%" controls >
+                <source src="">
+            </video>                        
+        </div>        
+    <div class="metadatosVideo">
+			<div class = "caracter">Nombre del Archivo:&nbsp&nbsp<label id="title" class="detail"></label></div>
+			<div class = "caracter">Tipo de Archivo:&nbsp&nbsp<label id="tipo" class="detail"></label></div>
+			<div class = "caracter">Width:&nbsp&nbsp<label id="w" class="detail"></label></div>
+			<div class = "caracter">Height:&nbsp&nbsp<label id="h" class="detail"></label></div>
+			<div class = "caracter">Fps:&nbsp&nbsp<label id="fps" class="detail"></label></div>
+			<div class = "caracter">Duracion:&nbsp&nbsp<label id="duracion" class="detail"></label></div>
+			<div class = "caracter">VCodec:&nbsp&nbsp<label id="vcodec" class="detail"></label></div>
+			<div class = "caracter">ACodec:&nbsp&nbsp<label id="acodec" class="detail"></label></div>
+			<div class = "caracter">Frecuencia:&nbsp&nbsp<label id="frecuencia" class="detail"></label></div>
+			<div class = "caracter">Canales:&nbsp&nbsp<label id="canales" class="detail"></label></div>
+		</div>
+    </div>
+ 		<div class="col-sm-8 text-left"> 
+        	<div class="table-responsive">
+        	<div class="radioButons">
+                <input class="radioInput" name="radioFiltro" type="radio"  id="todas" checked>  Todas &nbsp &nbsp
+                <input class="radioInput" name="radioFiltro" type="radio" id="personas"> Personas&nbsp&nbsp   
+                <input class="radioInput" name="radioFiltro" type="radio" id="objetos"> Objetos  &nbsp&nbsp 
+                <input class="radioInput" name="radioFiltro" type="radio" id="ocr">  OCR   &nbsp/
+              <!--tas por Pagina-->
+                <select id="longpage" onchange="recargarElem();">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                </select>
+             </div>
+                <table id = "d1" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                       <thead>
+                        <tr class="head-table">
+                            <th class="th-sm">ID</th>
+                            <th class="th-sm">Visualizar</th>
+                            <th class="th-sm">Nombre</th>
+                            <th class="th-sm">Tipo</th>
+                            <th class="th-sm">Enlaces</th>
+                            <th class="th-sm">Acción</th>
+                        </tr>
+                        </thead>
+                        <tbody id="d">
+                        </tbody>
+                </table>
+		</div>
+                     <div id="nextno" class="paginacion container-fluid text-center">
+                    <a onclick="previousPage();"><span class="glyphicon glyphicon-backward">&nbsp&nbsp&nbsp</span></a>
+                        <a onclick="nextPage();"><span class="glyphicon glyphicon-forward"></span></a>
+                    </div>
+        </div>
+
+    </div>
+</div>
+<!------------------------------------------------------------Main page of check labels administrator  ---------------------------------------------------->
+<div id="check-labels-main" style="display: none;">    
+	<div align="center" id="divVideoCanvasSug" class="normal">
+        <canvas id="canvas0" style="box-shadow: 0px 0px 5px 0px rgba(168,159,168,0.96);" class="normal" onclick="playpauseVideo()" ondblclick="fullScreenCanvasSug()"></canvas>
+        <table id="videoTimeLineSug" class="normal">
+            <tr>
+                <td width=30px>
+                    <a onclick="playVideo();" id="btnPlayVidSug"><span class="glyphicon glyphicon-play"></span></a>                
+                    <a onclick="pauseVideo();" id="btnPauseVidSug" style="display: none"><span class="glyphicon glyphicon-pause"></span></a>                
+                </td>
+                <td width=30px>
+                    <a onclick="stopVideo();"><span class="glyphicon glyphicon-stop"></span></a>                
+                </td>
+                <td>              
+                    <div widht=100%>
+                        <input id="TiempoSug" type="range" min="0" max="303.303" value="0" step="1" style="width: 98%" oninput="setVideoTime(this.value)" onchange="setVideoTime(this.value)">                    
+                    </div>
+                      
+                </td>
+                <td width=30px style="text-align: right">
+                    <a onclick="fullScreenCanvasSug()"><span class="glyphicon glyphicon-resize-full"></span></a>                
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!------------------------------------------------------------End of check page administrator  ---------------------------------------------------->
+<!------------------------------------------------------------Main page of add-modify labels administrator  ---------------------------------------------------->
+<div class="container-fluid text-center" id="add-modify-labels-main" style="display: none;">
+	<h2 style="margin-top: -20PX; margin-bottom: 5PX">Personalizar Etiquetas</h2>		
+		<div id="video21" style="width: 100%">        
+            <table cellpadding="2" style="width: 60%; margin-left: auto;margin-right:auto; ">
+                <tr>
+                    <td style="text-align: right">
+                        <canvas id="canvasEdit" class="normal" style="box-shadow: 0px 0px 5px 0px rgba(168,159,168,0.96);"></canvas>           
+                                                                                                                        
+                        <table id="videoTimeLineSug" class="normal" style="width: 100%">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td id = "timeLineDobleSlider">
+                                    <div class="aria-widget-slider" style="width: 100%">                                     
+                                      <div id="railT" class="rail" style="width: 98%;">
+                                        <img id="minTime"
+                                             src="../imagenes/min-arrow.png"
+                                             role="slider"
+                                             tabindex="0"
+                                             class="min thumb"
+                                             aria-valuemin="0"
+                                             aria-valuenow="0"
+                                             aria-valuetext="0"
+                                             aria-valuemax="303.303"
+                                             aria-label="Time Minimum">
+                                        <img id="maxTime"
+                                             src="../imagenes/max-arrow.png"
+                                             role="slider"
+                                             tabindex="0"
+                                             class="max thumb"
+                                             aria-valuemin="0"
+                                             aria-valuenow="303.303"
+                                             aria-valuetext="303.303"
+                                             aria-valuemax="303.303"
+                                             aria-label="Time Maximum">
+                                      </div>                             
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width=30px>
+                                    <a onclick="playVideo();" id="btnPlayVidEdit"><span class="glyphicon glyphicon-play" style="font-size:20px;" ></span></a>                
+                                    <a onclick="pauseVideo();" id="btnPauseVidEdit" style="font-size:20px;display: none"><span class="glyphicon glyphicon-pause"></span></a>                
+                                </td>
+                                <td width=30px>
+                                    <a onclick="stopVideo();"><span class="glyphicon glyphicon-stop" style="font-size:20px;"></span></a>                
+                                </td>
+                                <td>              
+                                    <div widht=100%>
+                                        <input id="TiempoEdit" type="range" min="0" max="303.303" value="0" step="1" style="width: 98%" oninput="setVideoTime(this.value)" onchange="setVideoTime(this.value)">                    
+                                    </div>
+
+                                </td>                                
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="visible-md visible-lg" style="padding: 5px; width: 370px" valign="top" id="tdEdicionEiquetas">
+                        <DIV id="divEdicionEiquetas">
+                        <table style="text-align: left">
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label>Tipo:  </label>
+                                </td>
+                                <td>
+                                    <select id="selectTipoEdit">
+                                        <option value=1>OCR</option>
+                                        <option value=2>Objeto</option>
+                                        <option value=3>Persona</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label>Nombre: </label>
+                                </td>
+                                <td nowrap>
+                                    <input type="text" id="txtNombreEdit" value="" width=500px height="20px" style="font: 400 15px/1.8 Lato, sans-serif;"/>
+                                </td>                                
+                            </tr>
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label nonw>Tiempo inicial: </label>
+                                </td>
+                                <td nowrap>
+                                    <label id="lblTiempoInicio" />
+                                </td>                                
+                            </tr>
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label>Tiempo Final: </label>
+                                </td>
+                                <td nowrap>
+                                    <label id="lblTiempoFinal" />
+                                </td>                                
+                            </tr>
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label>Posición inicial: </label>
+                                </td>
+                                <td nowrap>
+                                    <label id="lblPosInicial" />
+                                </td>                                
+                            </tr>
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label>Posición Final: </label>
+                                </td>
+                                <td nowrap>
+                                    <label id="lblPosFinal" />
+                                </td>                                
+                            </tr>
+                            <tr>                                
+                                <td colspan="2" align="center">     
+                                    <input type="button" value="Crear" id="button-Crear-Etiqueta" class="Create-button" onClick="actualizarEtiqueta()"/>
+                                    <input type="button" value="Actualizar" id="button-Actualizar-Etiqueta" class="Update-button" onClick="actualizarEtiqueta()"/>
+                                    <input type="button" value="Cancelar" id="button-Cancelar" class="Cancel-button" onClick="cancelarEdicionEtiqueta()"/>
+                                </td>
+                            </tr>
+                        </table>
+                        </DIV>                    
+                        <div id="divEdicionAudioTexto" style="display: none">
+                        <table style="text-align: left">
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label>Id:  </label>
+                                </td>
+                                <td>
+                                    <label id="idAT" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label>Texto:  </label>
+                                </td>
+                                <td>
+                                    <textarea id="txtAudioTexto"  rows="4" cols="30"></textarea>
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label nonw>Tiempo inicial: </label>
+                                </td>
+                                <td nowrap>
+                                    <label id="lblTiempoInicioAT" />
+                                </td>                                
+                            </tr>
+                            <tr>
+                                <td nowrap style="padding: 5px">
+                                    <label>Tiempo Final: </label>
+                                </td>
+                                <td nowrap>
+                                    <label id="lblTiempoFinalAT" />
+                                </td>                                
+                            </tr> 
+                            <tr>                                
+                                <td colspan="2" align="center">                                         
+                                    <input type="button" value="Actualizar" id="button-Actualizar-AT" class="Update-button" onClick="actualizarAT()"/>
+                                    <input type="button" value="Cancelar" id="button-Cancelar" class="Cancel-button" onClick="cancelarEdicionAT()"/>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                        </div>
+                    </td>
+                
+                </tr>
+                
+                
+            </table>
+			
+            <div id="output"></div>
+		</div>    
+        <div style="text-align: left">
+            Editar: &nbsp &nbsp
+            <input class="radioInput" name="radioEtiquetas" type="radio"  id="etiquetas" onchange="mostrarEtiquetas(this);" checked>  Etiquetas &nbsp &nbsp
+            <input class="radioInput" name="radioEtiquetas" type="radio" id="audiotexto" onchange="mostrarAudioTexto(this);"> Audio Texto&nbsp&nbsp                                 
+        </div>
+        <div id="etiquetasTime" style="text-align: center; width: 100%">
+             <div id="timeline" style="height: 180px; width: 100%;"></div>
+        </div>
+        <div id="audioTextoTimeCont" style="display: none">
+            <div id="audioTextoTime" style="overflow-y:scroll;width: 100%;height: 180px;text-align: justify; box-shadow: 0px 0px 5px 0px rgba(168,159,168,0.96);" >            
+            </div>
+        </div>
+    
+		<div class="caracteristicasPage2 table-responsive" style="display: none" >
+			       <table id = "d3" class="table table-striped table-bordered table-sm" cellspacing="0" width="80%">
+                       <thead>
+                        <tr class="head-table">
+                            <th class="th-sm">ID</th>
+                            <th class="th-sm">Vista</th>
+                            <th class="th-sm">Nombre</th>
+                            <th class="th-sm">Tipo</th>
+                            <th class="th-sm">Enlaces</th>
+                            <th class="th-sm">Acción</th>
+                        </tr>
+                        </thead>
+                        <tbody id="d2">
+                        </tbody>
+                </table>
+                
+		<!--	<table id = "d2">
+					<tr class="label4">
+						<td class="rowsN">Número ID</td>
+						<td class="rowsN">Previsualización</td>
+						<td class="rowsN">Nombre</td>
+						<td class="rowsN">Tipo</td>
+						<td class="rowsN">Acción</td>
+						<td class="rowsN">Identificación de enlaces</td>
+					</tr>
+			</table>	
+
+			<div id="nextno">
+				<li onclick="previousPage()">&lt</li>
+				<li onclick="nextPage()">&gt</li>
+			</div>
+            -->
+			
+
+		
+		
+		</div>
+                    <div id="nextno" class="paginacion" style="display: none">
+                        <a onclick="previousPage();"><span class="glyphicon glyphicon-backward"></span></a>
+                        <a onclick="nextPage();"><span class="glyphicon glyphicon-forward"></span></a>
+                    </div>			
+         <!--           Etiquetas por página
+			<select id="longpage">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="5">5</option>
+				<option value="10" selected>10</option>
+			</select>-->
+
+</div>
+<!------------------------------------------------------------End of add-modify page of administrator  ---------------------------------------------------->
+
+    
+    <!-- Trigger the modal with a button -->
+
+<!-- Modal -->    
+<div id="ModalPrevisualizarEtiqueta" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title" id="tituloModalPreview">Imagen Etiqueta</h2>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <div id="cargandoPrev">
+          La imagen se está cargando espere unos segundos...
+          </div>
+          <canvas id='CanvasPreview' style="width: 100%" />
+          
+      </div>      
+    </div>
+
+  </div>
+</div>
+          <!-- Modal editar-->
+        <div id="editModal" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content editModal">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Editar etiqueta</h3>
+              </div>
+              <div class="modal-body" style="text-align: justify">
+                <div>
+                  <label style="font-weight: bold;">Nombre:</label>
+                    <input type="text" class="inputEdit" id="newNameEdit">
+                </div>
+                <br>
+                <div>
+                	<label style="font-weight: bold;">Tipo de Etiqueta:</label>
+                    <input type="text" class="inputEdit" id="newTypeEdit">
+
+                </div>
+
+              </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="" data-dismiss="modal">Guardar</button>
+                    <button type="button" class="btn btn-secondary" style="background: #CD3515" data-dismiss="modal">Cerrar</button>
+                    
+                </div>      
+            </div>
+
+          </div>
+        </div>    
+ <!-- Modal de edicion-->
+
+
+<!-- Footer -->
+<footer class="text-center">
+  <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TOP">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a><br><br>
+  <p>Derechos reservados <a href="https://www.ucuenca.edu.ec" data-toggle="tooltip" title="Visitanos">www.ucuenca.edu.ec</a></p> 
+</footer>
+<!-- Funcion reutilizada para navegabilidad atra ves de la misma pagina movimiento sutil desde la parte inferior al top de la pagina-->
+<script>
+$(document).ready(function(){
+  // Initialize Tooltip
+  $('[data-toggle="tooltip"]').tooltip(); 
+  
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+})
+</script>
+<script>
+var valores;
+var ifmp4 = false;
+var ws = new WebSocket("ws://190.15.132.91:9003/");
+ws.onmessage = function (event) {
+	data = JSON.parse(event.data);
+
+	var prueba=data;
+	if (data.type=='information'){
+		document.getElementById("miparrafo").innerHTML="";
+	    document.getElementById("miparrafo").innerHTML=data.action;}
+    if (data.type=='command'){
+    	document.getElementById("miparrafo").innerHTML="";
+	    document.getElementById("miparrafo").innerHTML=data.action;
+	    if (data.action=='videoInformation'){
+	    	valores = data.parameters;
+	    	document.getElementById("miparrafo").innerHTML+=valores;
+	    	//valores = valores.split(",")
+	    	document.getElementById("title").innerHTML=valores[0];
+	    	document.getElementById("tipo").innerHTML=valores[1];
+	    	document.getElementById("w").innerHTML=valores[2]
+	    	document.getElementById("h").innerHTML=valores[3];
+	    	document.getElementById("fps").innerHTML=valores[4];
+	    	document.getElementById("duracion").innerHTML=valores[5];
+	    	document.getElementById("vcodec").innerHTML=valores[6];
+	    	document.getElementById("acodec").innerHTML=valores[7];
+	    	document.getElementById("frecuencia").innerHTML=valores[8];
+	    	document.getElementById("canales").innerHTML=valores[9];
+
+	    	//ws.send(JSON.stringify({'type':'command','action': 'sacaShots', 'parameters':['dra.mp4',24,320,240]}));
+	    }
+
+	    //Test code on 13/2/19 begin
+		if (data.action=='videoError'){
+			document.getElementById("miparrafo").innerHTML=data.parameters;
+    	}
+
+	    if (data.action=='videoShots'){
+			//document.getElementById("miparrafo").innerHTML="Video shots detectados...";
+			document.getElementById("shotsinput").innerHTML=data.parameters;
+			var fSHOTS = data.parameters;
+	    }
+
+	    if (data.action=='videoOcr'){
+			n = data.parameters;
+			document.getElementById("miparrafo").innerHTML="Objetos OCR detectados";
+			document.getElementById("ocrinput").innerHTML=n;
+			var fOCR = n;
+		}
+	    if (data.action=='videoDASH'){
+			//document.getElementById("contenedor").innerHTML="<video id='example-video' width=600 height=300 class='video-js vjs-default-skin' controls> </video>";
+			document.getElementById("contenedor").style.visibility = "hidden";
+			//alert(n);
+			var n = data.parameters
+			document.getElementById("dashinput").innerHTML=n;
+			document.getElementById("contenedor").style.visibility = "visible";
+			var player = videojs('example-video');
+			player.src({ src: n, type: 'application/dash+xml'});
+			player.play();
+
+        }
+
+       	if (data.action=='videoAudioTexto'){
+			n = data.parameters
+			fAT = n;
+			document.getElementById("audiotext").innerHTML=n;
+        }
+        if (data.action=='videoPersonas'){
+			n = data.parameters
+			fPEOPLE = n;
+			document.getElementById("detectperson").innerHTML=n;
+        }
+		if (data.action=='videoObjetos'){
+			n = data.parameters
+			fOBJECT = n;
+			document.getElementById("detectobject").innerHTML=n;
+        }
+        if (data.action=='videoLista'){
+			n = data.parameters
+			document.getElementById("miparrafo").innerHTML=n;
+			document.getElementById("selv").style.visibility = "visible";
+			i=0;
+			while (i!=n.length){
+				var selv = document.getElementById("selv");
+				selv.innerHTML+="<option value="+n[i][0]+">"+n[i][1]+"</option>";
+
+				i=i+1;
+			}
+		}
+	}
+}
+
+function prueba()
+	 {
+	 //alert("entra");
+	 minus = document.getElementById("myText").value;
+	 ws.send(JSON.stringify({'type':'information','action': minus}));
+	};
+
+/*Hide div of video*/
+/*document.getElementById("video1").style.display = "none";
+document.getElementById("video2").style.display = "none";
+document.getElementById("cAux").style.display = "none";*/
+
+/*if is not mp4, then display an alert*/
+
+function sendFile() {
+	var fn = document.getElementById('filename').value;
+	
+ 		//If correct, then send file
+ 	if (ifmp4){
+ 		document.getElementById("miparrafo").innerHTML = "Comienza a recibir archivo... por favor espere";
+ 		ws.send(JSON.stringify({'type':'binary','class': 'upload', 'name':document.getElementById("myText2").value,'fname':fn}));
+ 		var file = document.getElementById('filename').files[0];
+	    var reader = new FileReader();
+	    var rawData = new ArrayBuffer();
+
+	    reader.loadend = function() {
+	    }
+
+	    reader.onload = function(e) {
+			ws.send(JSON.stringify({'type':'alert','action':'inicia'}));
+	    	rawData = e.target.result;
+		 	//alert(rawData.byteLength);
+			var i=0;
+			while (i<rawData.byteLength){
+				ws.send(rawData.slice(i,i+904600));
+				i=i+904600;
+			}
+			ws.send(JSON.stringify({'type':'alert','action':'termina'}));
+	        //alert("the File has been transferred.")
+		    }
+	        reader.readAsArrayBuffer(file);
+	    }
+	    ifmp4 = false;
+	
+}
+
+
+		function shots()
+        {
+        	ws.send(JSON.stringify({'type':'command','action': 'sacaShots', 'parameters':[document.getElementById("title").value,document.getElementById("fps").value,document.getElementById("w").value,document.getElementById("h").value]}));
+        }
+
+        function ocr()
+		{
+			ws.send(JSON.stringify({'type':'command','action': 'sacaOcr', 'parameters':[document.getElementById("title").value,document.getElementById("fps").value,document.getElementById("w").value,document.getElementById("h").value]}));
+        }
+
+        function dash()
+		{
+			ws.send(JSON.stringify({'type':'command','action': 'sacaDash', 'parameters':[document.getElementById("title").value]}));
+        }
+
+        function audioToText()
+		{
+			ws.send(JSON.stringify({'type':'command','action': 'sacaAudio', 'parameters':[document.getElementById("title").value]}));
+        }
+
+         function people()
+		{
+			ws.send(JSON.stringify({'type':'command','action': 'sacaPersonas', 'parameters':[document.getElementById("title").value, document.getElementById("fps").value, document.getElementById("w").value, document.getElementById("h").value]}));
+        }
+
+        function objects()
+		{
+			ws.send(JSON.stringify({'type':'command','action': 'sacaObjetos', 'parameters':[document.getElementById("title").value, document.getElementById("fps").value, document.getElementById("w").value, document.getElementById("h").value]}));
+        }
+        
+        function cargaLista()
+        {
+			ws.send(JSON.stringify({'type':'command','action': 'cargaVideos', 'parameters':[]}));
+        }
+
+		function updateVideo()
+		{
+			//alert(selv.value);
+			ws.send(JSON.stringify({'type':'command','action': 'cargaVideo', 'parameters':[selv.value]}));
+		}
+
+
+
+
+/*******************************      AUXILIARES     VARIABLES      **********************************************/
+		
+		var fMetaVideo = ["videos/9rtthe_o.mp4", "video", 1920, 1080, 30, 303.303, "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10", "AAC (Advanced Audio Coding)", 48000, 2, "Proyecto Ingenieria"];
+			document.getElementById("title").innerHTML=fMetaVideo[0];
+	    	document.getElementById("tipo").innerHTML=fMetaVideo[1];
+	    	document.getElementById("w").innerHTML=fMetaVideo[2]
+	    	document.getElementById("h").innerHTML=fMetaVideo[3];
+	    	document.getElementById("fps").innerHTML=fMetaVideo[4];
+	    	document.getElementById("duracion").innerHTML=fMetaVideo[5];
+	    	document.getElementById("vcodec").innerHTML=fMetaVideo[6];
+	    	document.getElementById("acodec").innerHTML=fMetaVideo[7];
+	    	document.getElementById("frecuencia").innerHTML=fMetaVideo[8];
+	    	document.getElementById("canales").innerHTML=fMetaVideo[9];
+	
+		var fOCR = [[137, 913, 516, 957, " Dr. Andrés Vasquez", 2340, 2640],[137, 910, 488, 954, " Jhonathan Blandin", 4920, 5220],[137, 912, 573, 956, " Mst. Veronica Cardenas —", 6660, 6900],[137, 996, 1085, 1036, " Prototipo de Exoesqueleto Robdtico usable en extremidades inferiores.", 1620, 1860],[137, 992, 1141, 1033, " Prototipo de Exoesqueleto Robdtico usable en extremidades inferiores.", 2340, 2640],[137, 994, 1113, 1036, " Prototipo de Exoesqueleto Robdtico usable en extremidades inferiores.", 4980, 5220],[137, 996, 1113, 1036, " Prototipo de Exoesqueleto Robdtico usable en extremidades inferiores.", 6660, 6900],[137, 996, 1141, 1036, " Prototipo de Exoesqueleto Robdtico usable en extremidades inferiores.", 8040, 8280],[137, 912, 459, 957, "Cristhian Mufioz", 6300, 6360],[137, 949, 1056, 995, "DIRECTOR DEL PROYECTO. DE INVESTIGACION", 1620, 1860],[137, 475, 886, 540, "Direccion de Investigacion", 480, 540],[137, 956, 630, 1000, "Direccion de Investigacion", 4980, 5220],[137, 956, 573, 997, "Direccion de Investigacion", 5700, 5820],[705, 390, 1454, 456, "Direccién de Investigacién", 120, 180],[1472, 983, 1880, 1022, "Direccién de Investigacién", 240, 420],[1188, 541, 1795, 596, "Direccién de Investigacién", 480, 540],[1444, 981, 1880, 1020, "Direccién de Investigacién", 1320, 3120],[1472, 983, 1880, 1020, "Direccién de Investigacién", 3240, 4800],[1472, 981, 1880, 1018, "Direccién de Investigacién", 5940, 6420],[1472, 983, 1880, 1022, "Direccién de Investigacién", 7140, 7260],[1472, 983, 1880, 1022, "Direccién de Investigacién", 7500, 7560],[1472, 983, 1880, 1024, "Direccién de Investigacién", 7980, 8820],[705, 389, 1454, 456, "Direccién de Investigacién", 8940, 9060],[137, 912, 516, 956, "Dr. Ismael Minchala", 1560, 1620],[137, 912, 516, 956, "Dr. Ismael Minchala", 1740, 1860],[137, 912, 402, 957, "Elio Quevedo", 5580, 5820],[137, 953, 573, 997, "Equipo de Investigacion", 6300, 6360],[677, 847, 1255, 920, "INVESTIGA UC", 8940, 9000],[137, 955, 715, 995, "INVESTIGADORA DEL PROYECTO", 2340, 2640],[137, 951, 800, 995, "INVESTIGADORA DEL PROYECTO", 6660, 6900],[137, 951, 772, 995, "INVESTIGADORA DEL PROYECTO", 8040, 8280],[137, 910, 488, 956, "Mst. Esteban Mora", 8040, 8280],[137, 543, 857, 596, "Prototipo de Exoesqueleto Robotico", 480, 540],[1444, 949, 1880, 988, "RSIDARDE CUENCA", 4920, 5100],[1444, 949, 1880, 988, "RSIDARDE CUENCA", 5220, 5280],[137, 990, 1113, 1033, "Teeleyt ste) de avert ace) Robotico usable en extremidades inferiores.", 5700, 5760],[677, 326, 1482, 390, "UNIVERSIDAD DE CUENCA", 120, 180],[1444, 949, 1880, 988, "UNIVERSIDAD DE CUENCA", 240, 420],[1188, 496, 1795, 544, "UNIVERSIDAD DE CUENCA", 480, 540],[1444, 949, 1880, 988, "UNIVERSIDAD DE CUENCA", 600, 840],[1444, 949, 1880, 988, "UNIVERSIDAD DE CUENCA", 1320, 3120],[1444, 949, 1880, 988, "UNIVERSIDAD DE CUENCA", 3240, 4800],[1444, 951, 1880, 988, "UNIVERSIDAD DE CUENCA", 5940, 6420],[1444, 949, 1880, 988, "UNIVERSIDAD DE CUENCA", 7200, 7680],[1444, 949, 1880, 988, "UNIVERSIDAD DE CUENCA", 7980, 8820],[677, 328, 1482, 390, "UNIVERSIDAD DE CUENCA", 8940, 9000],[137, 598, 857, 646, "usable en extremidades inferiores.", 480, 540]];
+
+		var fOBJECT = [["teléfono móvil", 1220, 272, 1312, 364, 4470, 4470, 0.5454705357551575],["silla", 424, 0, 668, 300, 7830, 7830, 0.7967427372932434],["silla", 208, 0, 480, 356, 7830, 7830, 0.6766917705535889], ["silla", 424, 28, 660, 340, 7860, 7860, 0.8544504046440125],["silla", 220, 12, 448, 364, 7860, 7860, 0.8366671800613403],["silla", 8, 8, 248, 428, 7860, 7860, 0.6217942833900452],["silla", 252, 144, 532, 492, 7890, 7890, 0.9427518248558044],["silla", 460, 164, 676, 456, 7890, 7890, 0.9379661679267884],["silla", 40, 148, 228, 548, 7890, 7890, 0.8232367038726807],["silla", 288, 272, 500, 596, 7920, 7920, 0.9499843120574952],["silla", 520, 392, 688, 564, 7920, 7920, 0.8600180149078369],["silla", 68, 276, 304, 660, 7920, 7920, 0.6968236565589905],["silla", 276, 284, 508, 572, 7950, 7950, 0.5420913100242615],["persona", 752, 28, 1816, 1056, 240, 270, 0.998765468597412],["persona", 820, 32, 1868, 1040, 300, 420, 0.9988637566566468],["persona", 796, 36, 1824, 1036, 570, 780, 0.9992722868919371],["persona", 720, 44, 1872, 1036, 810, 810, 0.999647617340088],["persona", 784, 36, 1836, 1044, 840, 1470, 0.999185025691986],["persona", 800, 32, 1888, 1032, 1500, 1500, 0.9988755583763124],["persona", 648, 40, 1884, 1028, 1530, 1530, 0.9993566870689392],["persona", 772, 32, 1844, 1028, 1560, 1560, 0.9990221261978148],["persona", 780, 32, 1840, 1020, 1590, 1740, 0.999100148677826],["persona", 832, 36, 1856, 1036, 1770, 1950, 0.99917870759964],["persona", 784, 28, 1832, 1048, 1980, 2160, 0.999131679534912],["persona", 724, 40, 1880, 1024, 2190, 2220, 0.999312460422516],["persona", 832, 0, 1904, 1084, 2250, 2280, 0.9991196393966676],["persona", 692, 36, 1908, 1016, 2310, 2310, 0.9997184872627258],["persona", 832, 0, 1912, 1056, 2340, 2340, 0.9993194937705994],["persona", 376, 56, 1908, 988, 2370, 2370, 0.9998941421508788],["persona", 808, 0, 1936, 1064, 2400, 2460, 0.997948169708252],["persona", 588, 36, 1940, 1016, 2490, 2490, 0.9973734021186828],["persona", 852, 0, 1940, 1064, 2520, 2520, 0.9984443187713624],["persona", 584, 20, 1952, 1008, 2550, 2580, 0.9983638525009156],["persona", 856, 0, 1936, 1060, 2610, 2640, 0.9991992712020874],["persona", 592, 36, 1940, 1028, 2670, 2670, 0.9996961951255798],["persona", 672, 36, 1920, 1036, 2700, 2730, 0.9995938539505004],["persona", 672, 20, 1928, 1032, 2760, 2820, 0.999435007572174],["persona", 844, 0, 1928, 1076, 2850, 2880, 0.9995067119598388],["persona", 672, 32, 1920, 1024, 2910, 2940, 0.9995108842849731],["persona", 836, 0, 1944, 1044, 2970, 3270, 0.9983769059181212],["persona", 636, 28, 1960, 1048, 3300, 3330, 0.9988017678260804],["persona", 592, 24, 1928, 1040, 3360, 3480, 0.9993152022361756],["persona", 388, 60, 1888, 1004, 3510, 3510, 0.99956476688385],["persona", 552, 40, 1932, 1020, 3540, 3540, 0.999817967414856],["persona", 856, 24, 1912, 1048, 3570, 3570, 0.9997623562812804],["persona", 688, 40, 1920, 1016, 3600, 3600, 0.999845027923584],["persona", 832, 0, 1932, 1084, 3630, 3630, 0.9986215233802797],["persona", 848, 0, 1932, 1044, 3660, 3720, 0.9998680353164672],["persona", 616, 28, 1940, 1056, 3750, 3750, 0.9995132684707642],["persona", 536, 8, 1956, 1052, 3780, 3780, 0.9996169805526732],["persona", 368, 40, 1900, 1016, 3810, 3810, 0.999706208705902],["persona", 820, 0, 1940, 1052, 3840, 3840, 0.999680995941162],["persona", 884, 8, 1932, 1056, 3870, 3870, 0.9995537400245668],["persona", 820, 0, 1952, 1068, 3900, 4230, 0.9994573593139648],["persona", 812, 0, 1952, 1080, 4260, 4470, 0.9996579885482788],["persona", 660, 48, 1944, 1012, 4500, 4500, 0.9992828369140624],["persona", 864, 4, 1932, 1052, 4530, 4800, 0.9995945692062378],["persona", 740, 16, 1700, 1060, 4830, 5520, 0.9992169141769408],["persona", 756, 12, 1820, 1036, 5550, 5910, 0.9947361350059508],["persona", 760, 28, 1932, 1048, 5940, 6420, 0.9996873140335084],["persona", 668, 96, 1744, 1032, 6450, 7110, 0.998315453529358],["persona", 612, 44, 1876, 1040, 7140, 7140, 0.999042809009552],["persona", 688, 40, 1876, 1040, 7170, 7170, 0.9997034668922424],["persona", 796, 32, 1828, 1048, 7200, 7710, 0.9989254474639891],["persona", 916, 40, 1832, 1052, 7980, 8820, 0.9978026747703552],["mochila", 1464, 28, 1736, 404, 7740, 7770, 0.9427242875099182],["mochila", 1392, 112, 1628, 424, 7800, 7830, 0.9697401523590088],["mochila", 1352, 152, 1576, 464, 7860, 7860, 0.9037674069404602],["mochila", 1340, 276, 1572, 564, 7890, 7890, 0.7965116500]]
+		
+		var fPEOPLE = [["person 6", 1108, 124, 1436, 452, 241, 270],["person 6", 1076, 124, 1404, 452, 271, 300],["person 6", 1108, 124, 1436, 452, 301, 330],["person 6", 1140, 124, 1468, 452, 331, 360],["person 6", 1140, 156, 1468, 484, 361, 390],["person 6", 1172, 124, 1500, 452, 391, 420],["person 6", 1140, 156, 1468, 484, 7411, 7470],["person 6", 1140, 88, 1468, 416, 7471, 7500],["person 6", 1140, 156, 1468, 484, 7501, 7620],["person 6", 1108, 124, 1436, 452, 7621, 7650],["person 6", 1108, 156, 1436, 484, 7651, 7710],["person 6", 1140, 156, 1468, 484, 7711, 7740],["person 6", 1172, 156, 1500, 484, 7201, 7230],["person 6", 1140, 124, 1468, 452, 7231, 7260],["person 6", 1140, 156, 1468, 484, 7261, 7320],["person 6", 1140, 124, 1468, 452, 7321, 7350],["person 6", 1140, 156, 1468, 484, 7351, 7380],["person 6", 1108, 156, 1436, 484, 7381, 7410],["person 6", 1172, 156, 1500, 484, 2101, 2130],["person 6", 1140, 156, 1468, 484, 2131, 2160],["person 6", 1140, 124, 1468, 452, 2161, 2190],["person 6", 1280, 164, 1556, 436, 3481, 3510],["person 6", 1076, 156, 1404, 484, 7141, 7170],["person 6", 1108, 156, 1436, 484, 7171, 7200],["person 6", 1140, 124, 1468, 452, 1891, 1920],["person 6", 1140, 156, 1468, 484, 1921, 1950],["person 6", 1108, 156, 1436, 484, 1951, 1980],["person 6", 1172, 124, 1500, 452, 1981, 2010],["person 6", 1140, 124, 1468, 452, 2011, 2040],["person 6", 1140, 156, 1468, 484, 2041, 2100],["person 6", 1140, 124, 1468, 452, 1621, 1650],["person 6", 1172, 124, 1500, 452, 1651, 1680],["person 6", 1140, 156, 1468, 484, 1681, 1710],["person 6", 1140, 124, 1468, 452, 1711, 1740],["person 6", 1172, 124, 1500, 452, 1741, 1770],["person 6", 1140, 156, 1468, 484, 1771, 1890],["person 6", 1140, 156, 1468, 484, 781, 810],["person 6", 1140, 124, 1468, 452, 811, 840],["person 6", 1140, 156, 1468, 484, 841, 870],["person 6", 1140, 124, 1468, 452, 1321, 1350],["person 6", 1140, 156, 1468, 484, 1351, 1530],["person 6", 1108, 156, 1436, 484, 1531, 1620],["person 6", 1140, 156, 1468, 484, 421, 450],["person 6", 1172, 124, 1500, 452, 571, 600],["person 6", 1140, 156, 1468, 484, 601, 690],["person 6", 1108, 156, 1436, 484, 691, 720],["person 6", 1140, 124, 1468, 452, 721, 750],["person 6", 1108, 156, 1436, 484, 751, 780],["person 7", 1272, 124, 1600, 452, 2191, 2250],["person 7", 1308, 164, 1580, 436, 2251, 2280],["person 7", 1272, 124, 1600, 452, 2281, 2310],["person 7", 1280, 164, 1556, 436, 2311, 2370],["person 7", 1272, 124, 1600, 452, 2371, 2460],["person 7", 1272, 156, 1600, 484, 2461, 2490],["person 7", 1364, 136, 1636, 408, 4771, 4800],["person 7", 1308, 124, 1636, 452, 4801, 4830],["person 7", 1008, 128, 1400, 520, 5941, 5970],["person 7", 1272, 156, 1600, 484, 4531, 4560],["person 7", 1364, 136, 1636, 408, 4561, 4590],["person 7", 1336, 136, 1608, 408, 4591, 4620],["person 7", 1308, 220, 1580, 492, 4621, 4650],["person 7", 1336, 136, 1608, 408, 4681, 4710],["person 7", 1272, 156, 1600, 484, 4741, 4770],["person 7", 1336, 108, 1608, 380, 4291, 4320],["person 7", 1308, 156, 1636, 484, 4321, 4350],["person 7", 1308, 124, 1636, 452, 4351, 4380],["person 7", 1336, 164, 1608, 436, 4381, 4410],["person 7", 1364, 136, 1636, 408, 4411, 4440],["person 7", 1336, 136, 1608, 408, 4441, 4470],["person 7", 1308, 192, 1580, 464, 4111, 4140],["person 7", 1336, 164, 1608, 436, 4141, 4170],["person 7", 1272, 156, 1600, 484, 4171, 4200],["person 7", 1248, 88, 1640, 480, 4201, 4230],["person 7", 1392, 136, 1664, 408, 4231, 4260],["person 7", 1284, 88, 1680, 480, 4261, 4290],["person 7", 1340, 88, 1668, 416, 3931, 3960],["person 7", 1336, 136, 1608, 408, 3961, 3990],["person 7", 1308, 124, 1636, 452, 3991, 4020],["person 7", 1284, 88, 1680, 480, 4021, 4050],["person 7", 1340, 88, 1668, 416, 4051, 4080],["person 7", 1336, 136, 1608, 408, 4081, 4110],["person 7", 1308, 88, 1636, 416, 3721, 3750],["person 7", 1200, 164, 1472, 436, 3781, 3810],["person 7", 1308, 136, 1580, 408, 3811, 3840],["person 7", 1336, 164, 1608, 436, 3841, 3870],["person 7", 1364, 136, 1636, 408, 3871, 3900],["person 7", 1308, 164, 1580, 436, 3901, 3930],["person 7", 1308, 108, 1580, 380, 3451, 3480],["person 7", 1336, 136, 1608, 408, 3511, 3540],["person 7", 1364, 136, 1636, 408, 3541, 3570],["person 7", 1272, 124, 1600, 452, 3571, 3600],["person 7", 1336, 136, 1608, 408, 3601, 3630],["person 7", 1284, 88, 1680, 480, 3631, 3720],["person 7", 1308, 124, 1636, 452, 3091, 3120],["person 7", 1364, 136, 1636, 408, 3121, 3270],["person 7", 1224, 220, 1500, 492, 3301, 3330],["person 7", 1172, 248, 1444, 520, 3361, 3390],["person 7", 1336, 136, 1608, 408, 3391, 3420],["person 7", 1172, 220, 1444, 492, 3421, 3450],["person 7", 1336, 164, 1608, 436, 2881, 2940],["person 7", 1308, 124, 1636, 452, 2941, 2970],["person 7", 1272, 124, 1600, 452, 2971, 3000],["person 7", 1336, 136, 1608, 408, 3001, 3030],["person 7", 1308, 124, 1636, 452, 3031, 3060],["person 7", 1364, 136, 1636, 408, 3061, 3090],["person 7", 1364, 164, 1636, 436, 2701, 2730],["person 7", 1336, 164, 1608, 436, 2731, 2760],["person 7", 1364, 136, 1636, 408, 2761, 2790],["person 7", 1336, 164, 1608, 436, 2791, 2820],["person 7", 1308, 164, 1580, 436, 2821, 2850],["person 7", 1340, 124, 1668, 452, 2851, 2880],["person 7", 1336, 164, 1608, 436, 2491, 2550],["person 7", 1252, 192, 1528, 464, 2551, 2580],["person 7", 1308, 192, 1580, 464, 2581, 2610],["person 7", 1392, 136, 1664, 408, 2611, 2640],["person 7", 1364, 164, 1636, 436, 2641, 2670],["person 7", 1364, 136, 1636, 408, 2671, 2700],["person 8", 1224, 220, 1500, 492, 3331, 3360],["person 8", 1136, 252, 1364, 480, 3751, 3780],["person 8", 1200, 248, 1472, 520, 4501, 4530],["person 8", 1032, 108, 1304, 380, 4831, 4860],["person 8", 1172, 136, 1444, 408, 7951, 7980],["person 9", 1060, 108, 1332, 380, 4861, 4920],["person 9", 1008, 88, 1336, 416, 4921, 4950],["person 9", 1060, 108, 1332, 380, 4951, 4980],["person 9", 1032, 136, 1304, 408, 4981, 5010],["person 9", 1060, 108, 1332, 380, 5011, 5040],["person 9", 1008, 88, 1336, 416, 5041, 5130],["person 9", 1144, 136, 1416, 408, 8641, 8700],["person 9", 1116, 136, 1388, 408, 8701, 8730],["person 9", 1144, 136, 1416, 408, 8731, 8760],["person 9", 1144, 164, 1416, 436, 8761, 8790],["person 9", 1144, 136, 1416, 408, 8791, 8820],["person 9", 1144, 164, 1416, 436, 8821, 8850],["person 9", 1172, 108, 1444, 380, 8401, 8430],["person 9", 1200, 136, 1472, 408, 8431, 8460],["person 9", 1144, 136, 1416, 408, 8461, 8490],["person 9", 1108, 124, 1436, 452, 8491, 8520],["person 9", 1144, 136, 1416, 408, 8551, 8580],["person 9", 1140, 124, 1468, 452, 8581, 8610],["person 9", 1172, 136, 1444, 408, 8101, 8130],["person 9", 1108, 124, 1436, 452, 8131, 8160],["person 9", 1172, 108, 1444, 380, 8191, 8220],["person 9", 1172, 136, 1444, 408, 8221, 8250],["person 9", 1144, 136, 1416, 408, 8281, 8310],["person 9", 1172, 164, 1444, 436, 8311, 8340],["person 9", 1032, 136, 1304, 408, 5311, 5430],["person 9", 1008, 88, 1336, 416, 5431, 5490],["person 9", 1040, 88, 1368, 416, 5491, 5520],["person 9", 1008, 88, 1336, 416, 5521, 5550],["person 9", 1144, 164, 1416, 436, 8011, 8040],["person 9", 1144, 136, 1416, 408, 8071, 8100],["person 9", 976, 136, 1248, 408, 5131, 5160],["person 9", 868, 192, 1140, 464, 5161, 5190],["person 9", 1008, 88, 1336, 416, 5191, 5220],["person 9", 1060, 108, 1332, 380, 5221, 5250],["person 9", 1008, 88, 1336, 416, 5251, 5280],["person 9", 1060, 108, 1332, 380, 5281, 5310],["person 10", 1008, 168, 1400, 560, 5551, 5610],["person 10", 1040, 224, 1368, 548, 5611, 5640],["person 10", 1008, 168, 1400, 560, 5641, 5670],["person 10", 1008, 224, 1336, 548, 5701, 5730],["person 10", 1008, 168, 1400, 560, 5731, 5820],["person 10", 1076, 224, 1404, 548, 5821, 5850],["person 10", 1048, 128, 1440, 520, 6121, 6180],["person 10", 1088, 88, 1480, 480, 6241, 6270],["person 10", 1048, 88, 1440, 480, 6271, 6330],["person 10", 1108, 88, 1436, 416, 6391, 6420],["person 10", 1076, 124, 1404, 452, 6421, 6450],["person 10", 1008, 168, 1400, 560, 5851, 5880],["person 10", 1040, 224, 1368, 548, 5881, 5940],["person 10", 1076, 156, 1404, 484, 6001, 6030],["person 10", 1048, 88, 1440, 480, 6031, 6060],["person 10", 1048, 128, 1440, 520, 6061, 6090],["person 10", 1048, 88, 1440, 480, 6091, 6120],["person 11", 1076, 156, 1404, 484, 5971, 6000],["person 11", 1144, 136, 1416, 408, 6181, 6210],["person 11", 1088, 88, 1480, 480, 6211, 6240],["person 11", 1008, 188, 1336, 516, 6331, 6360],["person 11", 1048, 88, 1440, 480, 6361, 6390],["person 11", 1008, 156, 1336, 484, 6571, 6600],["person 11", 1008, 188, 1336, 516, 6601, 6630],["person 11", 940, 156, 1268, 484, 6631, 6660],["person 11", 976, 156, 1304, 484, 6811, 6990],["person 11", 1008, 224, 1336, 548, 6991, 7020],["person 11", 976, 188, 1304, 516, 7051, 7080],["person 12", 976, 188, 1304, 516, 6451, 6480],["person 12", 1008, 156, 1336, 484, 6481, 6510],["person 12", 1008, 188, 1336, 516, 6511, 6540],["person 12", 976, 156, 1304, 484, 6541, 6690],["person 12", 976, 188, 1304, 516, 6691, 6720],["person 12", 1008, 188, 1336, 516, 6721, 6750],["person 12", 1008, 188, 1336, 516, 7081, 7140],["person 12", 928, 168, 1320, 560, 6751, 6780],["person 12", 1008, 156, 1336, 484, 6781, 6810],["person 12", 1008, 224, 1336, 548, 6841, 6870],["person 12", 1008, 156, 1336, 484, 6871, 6900],["person 12", 1008, 188, 1336, 516, 6901, 6930],["person 12", 976, 156, 1304, 484, 6931, 7050],["person 13", 1200, 136, 1472, 408, 7981, 8010],["person 13", 1172, 136, 1444, 408, 8041, 8070],["person 13", 1172, 164, 1444, 436, 8161, 8190],["person 13", 1108, 124, 1436, 452, 8251, 8280],["person 13", 1144, 192, 1416, 464, 8341, 8370],["person 13", 1144, 164, 1416, 436, 8371, 8400],["person 13", 1172, 164, 1444, 436, 8521, 8640],["Dra. Marina Abril", 1224, 192, 1500, 464, 3271, 3300],["Dr. Marcelo Cazar", 1308, 136, 1580, 408, 2401, 2430],["Dr. Marcelo Cazar", 1272, 156, 1600, 484, 4471, 4500],["Dr. Marcelo Cazar", 1248, 88, 1640, 480, 4651, 4680],["Dr. Marcelo Cazar", 1272, 156, 1600, 484, 4711, 4740],["Dr. Marcelo Cazar", 1040, 224, 1368, 548, 5671, 5700]];
+        var fAudioText=[["el proyecto de investigación elaboración de mapas … el proceso ha consistido en ejecutar un esfuerzo", 0, 29.514833333333332],["y Conjunto entre lo que serían algunas instituciones", 29.514833333333335, 33.48266666666667],["Lily Ministerio de cultura el instituto de patrimonio", 33.48266666666667, 36.6515],["la universidad de Cuenca a través de las facultade…a parte de informática y la escuela de ingeniería", 36.6515, 50.05633333333333],["ese en ese proceso hemos aunado el esfuerzo para", 50.05633333333333, 53.77916666666666],["obtener los cráneos arqueológicos escanearlos a través", 53.77916666666666, 57.254],["tipo de tomografía especial esta tomografía nos pe…y del cráneo y a su vez puede también ser impresa", 57.25399999999999, 76.22883333333333],["es decir nosotros podemos", 76.22883333333333, 77.53166666666667],["obtener de estas medidas", 77.53166666666667, 80.2375],["Sí fue un hombre sí fue una mujer el rango de edad…iduo adaptado a los biotipos faciales del Ecuador", 80.2375, 87.04533333333333],["y especialmente a la región", 87.04533333333333, 88.72916666666667],["sur del país con 5 biotipos específicos", 88.72916666666667, 92.527],["y sobre eso hemos podido desarrollar las herramientas tecnológicas que nos permita", 92.527, 97.11383333333332],["hacer la aproximación facial la reconstrucción de la cara a partir del cráneo de individuos", 97.11383333333332, 102.64166666666668],["independiente de la época en la que fueron en la que vivieron y en la que fallecieron", 102.64166666666668, 111.6985],["fueron hallados en el parque ancestral pumapungo", 111.6985, 116.17533333333331],["te casaste terco", 116.17533333333331, 117.48516666666666],["para ver la posibilidad de incluir uno de los proyectos de él para", 117.48516666666666, 121.901],["reconstrucción maxilofacial la posibilidad de poder realizar una reconstrucción", 121.901, 127.14183333333332],["de los rostros de los cráneos encontrados aquí en pumapungo", 127.14183333333332, 131.01766666666666],["pensé fue que la", 131.01766666666666, 132.0185],["como el proyecto se fue alimentando", 132.0185, 133.9863333333333],["tomó nombre le dimos la presencia el rostro del pasado perdón", 133.9863333333333, 138.28616666666667],["Y así fue como empezamos de este proyecto porque c…tecnología la ciencia que mantiene la universidad", 138.28616666666667, 148.264],["se la puede aplicar a los estudios arqueológicos días no gráficos", 148.264, 152.64083333333335],["que lo realizamos continuamente dentro del área de…rabajo de investigación a través de la tecnología", 152.64083333333335, 167.02766666666668],["sobre el rostro no que pudieron haber tenido nuestros inserten en esta zona", 167.02766666666668, 171.7485],["uso de la mente", 171.7485, 172.85133333333334],["buscando aportar en el campo investigativo", 172.85133333333334, 176.74216666666666],["también fomentar futuros estudios futuros investigadores", 176.74216666666666, 180.319],["saqueo logos o simplemente médicos que a través de este espacio lúdico", 180.319, 185.66083333333333],["en este espacio en el que se da la información", 185.66083333333333, 188.08966666666663],["se puedan de generar nuevas propues", 188.08966666666663, 190.8435],["el apoyo interinstitucional entre la universidad d…proyecto reconstrucción de los rostros del pasado", 190.8435, 200.86933333333337],["y posterior a nuestros trabajos una vez que comenzamos ya descubrir cimentaciones de edificios", 200.86933333333337, 207.03216666666668],["empezaron aparecer un sinnúmero de osamentas relacionadas con sepulturas", 207.03216666666668, 211.52400000000003],["tanto pertenecientes al período cañari como proto …ionadas directamente con la presencia del incario", 211.52400000000003, 221.04783333333336],["si después de 500 años de la invasión española", 221.04783333333336, 224.6856666666667],["nosotros de nuestros dos trabajos encontramos alre…e 50 sepulturas creo que son 49 si no me equivoco", 224.6856666666667, 232.0245],["que podemos imaginar Cuántas sepulturas más", 232.0245, 234.43133333333336],["se despidieron y Cuánto cuánto material de importa…scubiertos no solamente en la época de la colonia", 234.43133333333336, 245.1731666666667],["sino incluso durante el momento en que atahualpa en señal de castigo destruye e incendia la ciudad", 245.1731666666667, 261.03000000000003]];
+		//var fPerson.length= new Array(0);
+		//var fPObject.length= new Array(0);
+
+		var fTable = new Array(fOCR.length+fOBJECT.length+fPEOPLE.length);
+		//var fTable = new Array(fOCR.length);
+
+		var fSHOTS = [[0, 0, 24],[1, 25, 53],[2, 54, 230],[3, 231, 442],[4, 443, 555],[5, 556, 864],[6, 865, 1307],[7, 1308, 2169],[8, 2170, 2641],[9, 2642, 3144],[10, 3145, 3228],[11, 3229, 3863],[12, 3864, 4416],[13, 4417, 4819],[14, 4820, 5237],[15, 5238, 5527],[16, 5528, 5860],[17, 5861, 5910],[18, 5911, 6404],[19, 6405, 6440],[20, 6441, 7128],[21, 7129, 7712],[22, 7713, 8328],[23, 8329, 8829],[24, 8830, 8855],[25, 8856, 8885],[26, 8886, 8910],[27, 8911, 9065],[28, 9066, 9089]];
+
+		var OCRbool = false;
+			
+		function removeActualLabels(){
+			OCRbool = true;
+			if(OCRbool){
+				$(".labelY").remove();
+			}
+			OCRbool = false;
+		}
+		var elementTypes = document.getElementById("tiposnav");
+		var labelAI = "";
+		var Todas = document.getElementById("todas");
+		var OCR = document.getElementById("ocr");
+		var Audio = document.getElementById("objetos");
+		var Video = document.getElementById("personas");
+			
+		Todas.onclick = function(){
+			console.log(Todas.innerText);
+			removeActualLabels();
+			filterLabels("Todas");
+		}
+		OCR.onclick = function(){
+			console.log(OCR.innerText);
+			removeActualLabels();
+			filterLabels("OCR");
+		}
+		Audio.onclick = function(){
+			console.log(Audio.innerText);
+			removeActualLabels();
+			filterLabels("Objeto");
+		}
+		Video.onclick = function(){
+			console.log(Video.innerText);
+			removeActualLabels();
+			filterLabels("Persona");
+		}
+		/**Funcion cuando cambia la paginacion**/
+		function recargarElem(){
+				document.getElementById("todas").click();
+			}
+
+/*****************     This block of code permits to show or hide different divs in the same page  *******************/
+		var manager_main =  document.getElementById('manager-page-main'); //Or another
+			
+		document.getElementById('check-labels').onclick = function(){
+			//$('#manager-page').toggle();//One way
+			var manager =  document.getElementById('check-labels-main'); //Or another
+			if (manager_main.style.display ='block'){
+				manager_main.style.display = "none";
+				manager.style.display = "block";
+				document.getElementById('add-modify-labels-main').style.display="none";
+                loadVideoCanvasMod();
+			}
+		}
+		document.getElementById('add-modify-labels').onclick = function(){
+			//$('#manager-page').toggle();//One way
+			var manager =  document.getElementById('add-modify-labels-main'); //Or another
+			if (manager_main.style.display ='block'){
+				manager_main.style.display = "none";	
+				manager.style.display = "block";
+				document.getElementById('check-labels-main').style.display="none";
+				actualPage();				
+                loadVideoCanvasEdit();                
+                load();                
+                
+				// document.getElementsByTagName('div')[16].style.height=;
+			}
+		}
+		document.getElementById('check-manager-main').onclick = function(){
+				manager_main.style.display ='block'
+				document.getElementById('check-labels-main').style.display="none";
+				document.getElementById('add-modify-labels-main').style.display="none";
+			}
+		/*document.getElementById('eliminate-labels').onclick = function(){
+			//$('#manager-page').toggle();//One way
+			//var manager_main =  document.getElementById('manager-page-main'); //Or another
+			var manager =  document.getElementById('d'); //Or another
+			if (manager_main.style.display ='block'){
+			//	manager_main.style.display = "none";	
+				manager.style.display = "none";
+				//loadEliminate();
+			}
+		}*/
+		var comeback = document.getElementsByClassName('cb');
+		for (var i=0;i<comeback.length; i++) {
+		
+			comeback[i].onclick = function(){
+				//$('#manager-page').toggle();//One way
+				//var manager_main =  document.getElementById('manager-page-main'); //Or another
+				var manager =  document.getElementById('check-labels-main'); //Or another
+				
+				if (manager_main.style.display ='none'){
+					manager_main.style.display = "block";
+					document.getElementById('check-labels-main').style.display = "none";
+					document.getElementById('add-modify-labels-main').style.display = "none";
+				}
+			}
+		}
+		
+
+
+
+		
+/********Links creation for index chosen*************************/
+		var optionParent = document.getElementById('longpage');
+		var optionChilds = optionParent.getElementsByTagName('option');
+		
+		for (var a =0 ; a<optionChilds.length;a++){
+			//console.log(optionChilds[a].value);
+			
+		}
+		
+		/*Check for state of drop menu*/
+		class creacionTablas{
+			constructor(op,och,longitude){
+				this.selecNumber=0;this.entero=0;this.residuo=0;
+				this.op = op;
+				this.och = och;
+				this.selecNumber = op.options[op.selectedIndex].value;
+				this.entero = parseInt(longitude/this.selecNumber);
+				this.residuo = longitude%this.selecNumber; 
+				// console.log(this.selecNumber.toString()+" :Número elegido");
+				// console.log(longitude.toString()+" :Número de etiquetas");
+				// console.log(this.entero.toString()+" :Número de páginas a poder desplegar");
+				// console.log(this.residuo.toString()+" :Número de etiquetas restantes en última página");
+			}
+			get getselecNumber(){return this.selecNumber}
+			get getlabelsQuan(){return arrayChosen.length;}
+			get getNumPages(){return this.entero;}
+			get getResiduoPages(){return this.residuo;}
+		}
+		let v = new creacionTablas(optionParent,optionChilds,fTable.length);
+		
+		$("#longpage").on('change', function(){new creacionTablas(optionParent,optionChilds,arrayChosen.length)});
+		
+		/*for (var i = 0; i<fTable.length; i++) {
+			if (i>v.getEntero*v.getselecNumber){
+				createLastPage();
+			}
+			else{
+				createFirstPages(v.getselecNumber);
+			}
+		
+			$('#d').append(newlabel);
+		}
+
+		function createFirstPages(i){
+			/*************creation of extra rows on a table************/ 
+			//filterLabels("Todas");
+		/*}
+		function createLastPage(){
+			var a = 0;
+		}*/
+
+		/*Load general table*/
+		loadGeneralTable();
+        loadVideoPrueba();
+		function loadGeneralTable(){
+			var j=0;
+			for (var i=0; i<fTable.length; i++) {
+				j=i+1;
+				if (i<fOCR.length){                             
+					fTable[i] = [i+1,"<span data-toggle='modal' data-target='#ModalPrevisualizarEtiqueta' onclick='SetImageInModal("+'"'+fOCR[i][4]+'"'+","+fOCR[i][5]+","+fOCR[i][0]+","+ fOCR[i][1]+","+ fOCR[i][2]+"," +fOCR[i][3]+");' title='Previsualizar Etiqueta' id='Prev"+j+"' class='glyphicon glyphicon-eye-open' ></span>",fOCR[i][4],'OCR',"PorDefinir","<span data-toggle='modal' title='Editar' value='"+j+"' id='ed_"+j+"' class='glyphicon glyphicon-edit' data-target='#editModal' onclick='setEditModal("+'"'+fOCR[i][4]+'"'+","+'"OCR"'+");'></span>&nbsp<span data-toggle='tooltip' title='Remove' value='"+j+"' id='rm_"+j+"' class='glyphicon glyphicon-remove' onClick='removeEtiqueta(this.id);'></span>"];
+				}
+				else {
+					if (i-fOCR.length<fOBJECT.length){
+						fTable[i] = [i+1,"<span data-toggle='modal' data-target='#ModalPrevisualizarEtiqueta' onclick='SetImageInModal("+'"'+fOBJECT[i-fOCR.length][0]+'"'+","+fOBJECT[i-fOCR.length][5]+","+fOBJECT[i-fOCR.length][1]+","+ fOBJECT[i-fOCR.length][2]+","+ fOBJECT[i-fOCR.length][3]+"," +fOBJECT[i-fOCR.length][4]+");'   title='Previsualizar Etiqueta' id='Prev"+j+"' class='glyphicon glyphicon-eye-open'></span>",fOBJECT[i-fOCR.length][0],'Objeto',"PorDefinir","<span data-toggle='modal' title='Editar' value='"+j+"' id='ed_"+j+"' class='glyphicon glyphicon-edit' data-target='#editModal' onclick='setEditModal("+'"'+fOBJECT[i-fOCR.length][0]+'"'+","+'"Objeto"'+");'></span>&nbsp<span data-toggle='tooltip' title='Remove' value='"+j+"' id='rm_"+j+"' class='glyphicon glyphicon-remove' onClick='removeEtiqueta(this.id);'></span>"];
+					}else {
+						fTable[i] = [i+1,"<span data-toggle='modal' data-target='#ModalPrevisualizarEtiqueta' onclick='SetImageInModal("+'"'+fPEOPLE[i-fOCR.length-fOBJECT.length][0]+'"'+","+fPEOPLE[i-fOCR.length-fOBJECT.length][5]+","+fPEOPLE[i-fOCR.length-fOBJECT.length][1]+","+ fPEOPLE[i-fOCR.length-fOBJECT.length][2]+","+ fPEOPLE[i-fOCR.length-fOBJECT.length][3]+"," +fPEOPLE[i-fOCR.length-fOBJECT.length][4]+");'  title='Previsualizar Etiqueta' id='Prev"+j+"' class='glyphicon glyphicon-eye-open'></span>",fPEOPLE[i-fOCR.length-fOBJECT.length][0],'Persona',"PorDefinir","<span data-toggle='modal' title='Editar' value='"+j+"' id='ed_"+j+"' class='glyphicon glyphicon-edit' data-target='#editModal' onclick='setEditModal("+'"'+fPEOPLE[i-fOCR.length-fOBJECT.length][0]+'"'+","+'"Persona"'+");'></span>&nbsp<span data-toggle='tooltip' value='"+j+"' title='Remove' id='rm_"+j+"' class='glyphicon glyphicon-remove' onClick='removeEtiqueta(this.id);'></span>"];
+					}
+				}
+			}
+		}
+				
+		/*Display in a sistematic order-Load labels*------------*/
+		var numberPageState = 0;
+		var arrayChosen=fTable;
+		function nextPage(){
+			numberPageState++;
+			if (numberPageState<=v.getNumPages){
+				removeActualLabels();
+				for (var i=v.selecNumber*(numberPageState-1); i<v.selecNumber*numberPageState; i++) {
+					var newlabel=  '<tr class="labelY">'+
+										'<td class="rowsY">'+arrayChosen[i][0]+'</td>'+
+										'<td class="rowsY" style="text-align: center;">'+arrayChosen[i][1]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][2]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][3]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][4]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][5]+'</td>'+
+									'</tr>'
+					$('#d').append(newlabel);
+					$('#d2').append(newlabel);
+				}
+			}else {
+				removeActualLabels();
+				for (var i=(v.getlabelsQuan-v.getResiduoPages); i<v.getlabelsQuan; i++) {
+					var newlabel=  '<tr class="labelY">'+
+										'<td class="rowsY">'+arrayChosen[i][0]+'</td>'+
+										'<td class="rowsY" style="text-align: center;">'+arrayChosen[i][1]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][2]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][3]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][4]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][5]+'</td>'+
+									'</tr>'
+					$('#d').append(newlabel);
+					$('#d2').append(newlabel);
+				}
+				numberPageState=v.getNumPages;
+			}
+		}
+		function previousPage(){
+			numberPageState--;
+			if (numberPageState>=1){
+				removeActualLabels();
+				for (var i=v.selecNumber*(numberPageState-1); i<v.selecNumber*numberPageState; i++) {
+					var newlabel=  '<tr class="labelY">'+
+										'<td class="rowsY">'+arrayChosen[i][0]+'</td>'+
+										'<td class="rowsY" style="text-align: center;">'+arrayChosen[i][1]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][2]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][3]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][4]+'</td>'+
+										'<td class="rowsY">'+arrayChosen[i][5]+'</td>'+
+									'</tr>'
+					$('#d').append(newlabel);
+					$('#d2').append(newlabel);
+				}
+			}else {
+				removeActualLabels();
+				actualPage();
+				}
+		}
+		function actualPage(){
+			removeActualLabels();
+			for (var i=0; i<v.selecNumber; i++) {
+				//arrayChosen[i] = [i+1,"PorDefinir",fTable[i][4],'OCR',"PorDefinir","PorDefinir"];
+				var newlabel=  '<tr class="labelY">'+
+									'<td class="rowsY">'+arrayChosen[i][0]+'</td>'+
+									'<td class="rowsY" style="text-align: center;">'+arrayChosen[i][1]+'</td>'+
+									'<td class="rowsY">'+arrayChosen[i][2]+'</td>'+
+									'<td class="rowsY">'+arrayChosen[i][3]+'</td>'+
+									'<td class="rowsY">'+arrayChosen[i][4]+'</td>'+
+									'<td class="rowsY">'+arrayChosen[i][5]+'</td>'+
+								'</tr>'
+				$('#d').append(newlabel);
+				$('#d2').append(newlabel);
+			}
+			numberPageState++;
+		}
+		actualPage();
+
+
+		function filterLabels(labelAI){	
+			if (labelAI=='Todas'){
+				arrayChosen = fTable;
+			}
+			if (labelAI=='OCR'){
+				arrayChosen = fTable.slice(0,fOCR.length);
+			}
+			if (labelAI=='Objeto'){
+				arrayChosen = fTable.slice(fOCR.length,fOCR.length+fOBJECT.length);
+			}
+			if (labelAI=='Persona'){
+				arrayChosen = fTable.slice(fOCR.length+fOBJECT.length,fOCR.length+fOBJECT.length+fPEOPLE.length);				
+			}
+
+			v = new creacionTablas(optionParent,optionChilds,arrayChosen.length);
+			actualPage();
+			var numberPageState = 0
+
+		}
+/***********************************************************************************************/
+
+
+// function hide1(){
+// 	var off = document.getElementById('manager-page');
+// 	//if (off.style.display == "block"){
+// 		off.style.display = 'none';
+// 	//}//else{
+// 		//off.style.display = "none";
+// 	//}
+// }
+	/*****Ftable must contain all characteristics from server***********/
+
+
+	
+/***********************************************************************************************/
+
+/*************Video section Config and other*******************/		
+		var rep = false;		
+	
+		//Draw the video in tehe canvas while the video is playing
+
+		var ii,ii2;						
+
+	
+		function crop(can, a, b) {
+
+		    // get your canvas and a context for it
+		    var ctx = can.getContext('2d');
+		    
+		    // get the image data you want to keep.
+		    var imageData = ctx.getImageData(a.x, a.y, b.x, b.y);
+		  
+		    // create a new cavnas same as clipped size and a context
+		    var newCan = document.createElement('canvas');
+		    newCan.width = b.x - a.x;
+		    newCan.height = b.y - a.y;
+		    var newCtx = newCan.getContext('2d');
+		  
+		    // put the clipped image on the new canvas.
+		    newCtx.putImageData(imageData, 0, 0);
+		  
+		    return newCan;    
+		 }
+
+
+//VID2.addEventListener("mouseover",function(){console.log(c)})
+
+		//ctx.strokeStyle = "#FF0000";
+		//ctx.strokeRect(20,20,150,100); 
+		a = [464, 900, 692, 990, 'Dra.', 48];
+		var lab=0,t=0;				
+
+/************************Display canvas as rectangle and Displayplay points as characteristics********************************/
+	var c2,containerUp,startVertLines,startVertLines2,endVertLines,tg,fps,widOverShots,tttt;
+	function load(){//created if because it wasnt loading dimensions before div was displayed
+		tttt=true;
+		c2 = document.getElementById('canvasPoints');
+		containerUp = document.getElementById('downwards');
+		// c2.width = document.getElementById('downwards').height;
+		// c2.height = ;
+		//console.log(containerUp.offsetHeight);
+		var ctx2 = c2.getContext('2d');
+		c2.height = containerUp.offsetHeight*0.15;//it was 0.15 for actual 3/10/2019 
+		c2.width = containerUp.offsetWidth;
+		//Vertical lines will start since
+		var startVertLines = c2.width/5;
+		var endVertLines = c2.height/5;
+
+		var startVertLines2 = c2.height-c2.height/9;
+
+		ctx2.beginPath();
+		ctx2.rect(0,0,c2.width,endVertLines);//UPHORIZONTAL
+		ctx2.rect(0,startVertLines2,c2.width,endVertLines);//DOWNHORIZONTAL
+		ctx2.rect(0,0,startVertLines,c2.height);//LEFT VERTICAL
+		ctx2.rect(c2.width-c2.width/150,0,c2.width/150,c2.height);//RIGHT VERTICAL
+		ctx2.fillStyle="rgb(0,40,80)";
+		ctx2.lineWidth = 3;
+		// rgb(144,200,255)
+		ctx2.fill();
+		ctx2.closePath();
+		
+		var tg = fMetaVideo[5];
+		var fps = fMetaVideo[4];
+		widOverShots = (c2.width-startVertLines)/fSHOTS.length;
+		ctx2.beginPath();	
+		ctx2.fillStyle="white";
+		ctx2.lineWidth = 3;
+		ctx2.font = "60% Arial";
+				
+	//	function dibujarEtiquetasCanvas(){
+			for (var i=0; i<fSHOTS.length; i++) {
+				var min = parseInt(fSHOTS[i][1]/fps);
+
+				var sg = fSHOTS[i][1]%fps;
+				var timeScale = min.toString()+":"+sg.toString();
+				//UP
+				ctx2.rect(startVertLines+widOverShots*(i),5,2,endVertLines);
+				ctx2.fillText(timeScale,startVertLines+widOverShots*(i)+3,20);
+				//DOWN
+				ctx2.rect(startVertLines+widOverShots*(i),startVertLines2,2,endVertLines*0.4);
+				ctx2.fillText(timeScale,startVertLines+widOverShots*(i)+3,startVertLines2+10);
+				
+	//		}
+		}		
+		ctx2.fill();
+		ctx2.closePath();
+
+
+/******This section of code, draws the circles on the canvas, and their color depends on the kinf of characteristic************/
+		var colorsCircles= ["red","black","blue","gray","pink","purple","green","brown"];
+		ctx2.beginPath();
+		ctx2.fillStyle="";
+		ctx2.lineWidth = 3;
+		ctx2.font = "60% Arial";
+		//ctx2.fillStyle="red";
+		ctx2.fillStyle=colorsCircles[1];
+		// rgb(144,200,255)
+		var a=0,
+		z=0,
+		r = 4,
+		nSH = createShotIndexForOCR(fOCR),
+		y = endVertLines+r;
+			
+		for (var i=0; i<fOCR.length; i++) {
+			for (var j=0;j<nSH[i].length;j++) {
+				if (nSH[i][j]!=undefined){
+					var x = startVertLines+nSH[i][j]*widOverShots;
+				
+					ctx2.beginPath();
+					ctx2.fillStyle=colorsCircles[z];
+					ctx2.arc(x, y+a, r, 0, 2 * Math.PI);
+					ctx2.fillText(fOCR[i][4],x+r,y+a+r)
+					ctx2.fill();
+					ctx2.closePath();
+					z++;if(z>colorsCircles.length-1){z=0;}
+					a+=r*2+2;if(a>startVertLines2-10){a=3;}
+					if (nSH[i][0]==undefined){console.log("empty");}
+					else{
+					var ttt = i.toString()+" "+fOCR[i][4]+":"+nSH[i][0].toString();
+					//console.log(ttt);
+					}		
+				}	
+
+			}				
+		}
+		//We add an event listener of click for each circle that represents that characteristic, so when it is clicked the video goes directly to this point in time	
+		c2.addEventListener('click',function(e,x,y){
+			//console.log(e.pageX,e.pageY);
+			var aa=0;
+			for (var i=0; i<fOCR.length; i++) {
+				var x = startVertLines+nSH[i][0]*widOverShots;
+				y = endVertLines+r;
+				ex = e.pageX-c2.offsetLeft+8,
+				ey = e.pageY-c2.offsetTop+4;
+			//	 console.log(ex, ey, x, y+a);
+				if (ex>=x-r&&ex<=x+r&&ey>=y+aa-r-2&&ey<=y+aa+r-2) {
+					console.log(fOCR[i]);
+					console.log(fOCR[i][5]/fMetaVideo[4]);
+					var auxOCR = fOCR[i];// ctx2.beginPath();
+					// ctx2.fillStyle=colorsCircles[z];
+					// ctx2.arc(ex,ey, r, 0, 2 * Math.PI);
+					// ctx2.fill();
+					// ctx2.closePath();
+					//vid2.removeEventListener('play', procPlay, false);
+					//vid2.addEventListener("play",procPlay(cvideo2,ctxvideo2,vid2,1,3));
+
+					vid2.currentTime = fOCR[i][5]/fMetaVideo[4];
+
+
+
+				}
+				aa+=r*2+2;if(aa>startVertLines2-10){a=3;}
+			}
+		},false);
+
+
+
+
+	}
+
+
+		/*function that finds the index of the shot that belongs to the appearance of the OCRi*/
+		function createShotIndexForOCR(setOF){
+			var nshot = Array(setOF.length);
+			for (var i=0; i<setOF.length; i++) {
+				nshot[i] = Array(1);
+				
+			}
+
+			var vector = Array(fSHOTS.length);
+			for (var i=0; i<setOF.length; i++) {
+				for (var j=0; j<fSHOTS.length; j++) {
+					//find where does the OCR object belongs to the shots nshot
+
+					// for (var j=0; j<fSHOTS.length; j++) {
+					// 	if (j+x&&fOCR[i][5]>=fSHOTS[j][1]&&fOCR[i][5]<=fSHOTS[j][2]&&fOCR[i][6]>=fSHOTS[j][1]&&fOCR[i][6]<=fSHOTS[j][2]){
+					// 		vector[j] = j;
+					// 		console.log(i.toString()+" OCR Belongs to Shot--> "+j.toString());
+					// 	}
+					// }
+				
+					if (setOF[i][5]>=fSHOTS[j][1]&&setOF[i][5]<=fSHOTS[j][2]&&setOF[i][6]>=fSHOTS[j][1]&&setOF[i][6]<=fSHOTS[j][2]){
+						nshot[i].push(j);
+						//nshot[i][0] = j;
+						//console.log(i.toString()+" OCR Belongs to Shot--> "+j.toString());
+					}
+
+					/*When it belongs to 2 shots*/
+					else if(j>1&&setOF[i][5]>=fSHOTS[j-1][1]&&setOF[i][5]<=fSHOTS[j][2]&&setOF[i][6]>=fSHOTS[j][1]&&setOF[i][6]<=fSHOTS[j][2]){
+						//console.log(i.toString()+" OCR Belongs to more tan one shot-1--> "+(j-1).toString());
+						nshot[i].push(j-1);
+						//nshot[i][1] = j-1;
+					}else if(j>1&&setOF[i][5]>=fSHOTS[j][1]&&setOF[i][5]<=fSHOTS[j][2]&&setOF[i][6]>=fSHOTS[j-1][1]&&setOF[i][6]<=fSHOTS[j][2]){
+						//console.log(i.toString()+" OCR Belongs to more tan one sho-1--> "+(j-1).toString());
+						nshot[i].push(j-1);
+						//nshot[i][2] = j-1;
+					}else if(j<fSHOTS.length&&setOF[i][5]>=fSHOTS[j][1]&&setOF[i][5]<=fSHOTS[j+1][2]&&setOF[i][6]>=fSHOTS[j][1]&&setOF[i][6]<=fSHOTS[j][2]){
+						//console.log(i.toString()+" OCR Belongs to more tan one shot+1--> "+(j+1).toString());
+						nshot[i].push(j+1);
+						//nshot[i][3] = j+1;
+					}else if(j<fSHOTS.length&&setOF[i][5]>=fSHOTS[j][1]&&setOF[i][5]<=fSHOTS[j][2]&&setOF[i][6]>=fSHOTS[j][1]&&setOF[i][6]<=fSHOTS[j+1][2]){
+						//console.log(i.toString()+" OCR Belongs to more tan one shota+1--> "+(j+1).toString());
+						nshot[i].push(j+1);
+						//nshot[i][4] = j+1;
+					}
+
+
+					/*When it belongs to 3 shots*/
+
+					else if(j>2&&setOF[i][5]>=fSHOTS[j-2][1]&&setOF[i][5]<=fSHOTS[j][2]&&setOF[i][6]>=fSHOTS[j][1]&&setOF[i][6]<=fSHOTS[j][2]){
+						//console.log(i.toString()+" OCR Belongs to more tan one shota-2--> "+(j-2).toString());
+						nshot[i].push(j-2);
+						//nshot[i][5] = j-2;
+					}else if(j>2&&setOF[i][5]>=fSHOTS[j][1]&&setOF[i][5]<=fSHOTS[j-2][2]&&setOF[i][6]>=fSHOTS[j][1]&&setOF[i][6]<=fSHOTS[j][2]){
+						//console.log(i.toString()+" OCR Belongs to more tan one shota-2--> "+(j-2).toString());
+						nshot[i].push(j-2);
+						//nshot[i][6] = j-2;
+					}else if(j<fSHOTS.length-1&&setOF[i][5]>=fSHOTS[j][1]&&setOF[i][5]<=fSHOTS[j][2]&&setOF[i][6]>=fSHOTS[j+2][1]&&setOF[i][6]<=fSHOTS[j][2]){
+						//console.log(i.toString()+" OCR Belongs to more tan one shota+2--> "+(j+2).toString());
+						nshot[i].push(j+2);
+						//nshot[i][7] = j+2;
+					}else if(j<fSHOTS.length-1&&setOF[i][5]>=fSHOTS[j][1]&&setOF[i][5]<=fSHOTS[j][2]&&setOF[i][6]>=fSHOTS[j][1]&&setOF[i][6]<=fSHOTS[j+2][2]){
+						//console.log(i.toString()+" OCR Belongs to more tan one shota+2--> "+(j+2).toString());
+						//console.log(i.toString()+" OCR Belongs to more tan one shota+1--> "+(j+1).toString());
+						nshot[i].push(j+1);
+						//nshot[i][8] = j+2;
+						nshot[i].push(j+2);
+						//nshot[i][7] = j+1;
+					}
+
+				}
+			}
+		for (var i = 0;i<nshot.length; i++) {
+			nshot[i].splice(0,1);
+		}
+		return nshot;		
+		}
+		/*Now its time to draw characteristics*/
+		/*Now fill with characteristics OCR*/
+
+		
+/***********************************************************************************************/
+/**********Adds a clabel using forms and canvas***********/
+	var active = false;
+    var currentX;
+    var currentY;
+    var initialX;
+    var initialY;
+    var xOffset = 0;
+    var yOffset = 0;
+    var dragItem;
+
+	function addCharacteristic(){
+		if (tttt){
+			console.log("yes");
+			var w = cvideo2.width;
+			var h = cvideo2.height;
+			ctxvideo2.beginPath();
+			ctxvideo2.strokeStyle = "black";
+			ctxvideo2.lineWidth = 5;
+			ctxvideo2.fillStyle="white";
+			ctxvideo2.font = "400% Arial";
+			
+
+			
+			 //cvideo2.fillText(fOCR[i][4],x,y);
+		    var dragItem = ctxvideo2.strokeRect(5,5,w/10,h/10);;
+		    console.log(dragItem);
+			ctxvideo2.fill();
+			ctxvideo2.closePath();
+			
+
+
+		    
+			cvideo2.addEventListener("touchstart", dragStart, false);
+		   	cvideo2.addEventListener("touchend", dragEnd, false);
+		   	cvideo2.addEventListener("touchmove", drag, false);
+
+		   	cvideo2.addEventListener("mousedown", dragStart, false);
+		  	cvideo2.addEventListener("mouseup", dragEnd, false);
+		   	cvideo2.addEventListener("mousemove", drag, false);
+			
+
+		}
+		
+	}
+
+     function dragStart(e) {
+      if (e.type === "touchstart") {
+        initialX = e.touches[0].clientX - xOffset;
+        initialY = e.touches[0].clientY - yOffset;
+      } else {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+      }
+
+      if (e.target === dragItem) {
+        active = true;
+      }
+    }
+
+    function dragEnd(e) {
+      initialX = currentX;
+      initialY = currentY;
+
+      active = false;
+    }
+
+	function drag(e) {
+      
+
+      if (active) {
+        
+        e.preventDefault();
+        
+        if (e.type === "touchmove") {
+          currentX = e.touches[0].clientX - initialX;
+          currentY = e.touches[0].clientY - initialY;
+        } else {
+          currentX = e.clientX - initialX;
+          currentY = e.clientY - initialY;
+        }
+
+        xOffset = currentX;
+        yOffset = currentY;
+
+        setTranslate(currentX, currentY, dragItem);
+      }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    }
+</script>
+
+
+</body>
+</html>
