@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+.rowsY {
+	text-align:justify;	
+}
+body {
+  text-align: center;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+#divVideoCanvasSug.normal{
+    width:100%;
+    margin:0 auto;    
+    position: relative;
+    display: inline-block;
+ }
+#canvas0.normal{
+    max-height:  height: calc(100vh - 50px); 
+    max-width: 100%;
+ }
+
+#videoTimeLineSug.normal{
+    width:100%;    
+    
+ }
+:-webkit-full-screen {
+    background-color: black;
+    height:100vh;
+}
+
+/* Firefox syntax */
+:-moz-full-screen {
+    background-color: black;
+    height:100vh;
+}
+
+/* IE/Edge syntax */
+:-ms-fullscreen {
+    background-color: black;
+    height:100vh;
+}
+
+/* Standard syntax */
+:fullscreen {
+    background-color: black;
+    height:100vh;
+}
+
+#canvasEdit.normal {
+    width:100%;    
+    cursor: crosshair;
+    border: 1px solid #000000;
+}
+label{
+    font: 400 15px/1.8 Lato, sans-serif;
+}
+span.resaltar{
+    background-color: yellow;
+}
+span:hover{
+    cursor: pointer;
+}
+.Create-button{
+  height:30px;
+  width:100;
+  background:#06F;
+  border:1px solid #f2f2f2;
+ /* border-radius:20px;*/
+  color: #FFF;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+  border-color:#006;
+}
+.Update-button{
+  height:30px;
+  width:115px;
+  background:#06F;
+  border:1px solid #f2f2f2;
+ /* border-radius:20px;*/
+  color: #FFF;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+  border-color:#006;
+}
+.Cancel-button{
+  height:30px;
+  width:100px;
+  background:#CD3515;
+  border:1px solid #f2f2f2;
+ /* border-radius:20px;*/
+  color: #FFF;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+  border-color:#006;
+}

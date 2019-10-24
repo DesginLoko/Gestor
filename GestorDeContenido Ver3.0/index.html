@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bienvenido</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/temaPrincipal.css">
+  <!--<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="javascript/login.js"></script>
+  <link rel="icon" href="imagenes/logoUC.jpg">
+</head>
+<body id="myLogin" data-spy="scroll" data-target=".loggin-header" data-offset="50">
+  <div class="login">
+  <div class="login-header" class="navbar-fixed-top">
+    <img src="imagenes/Escudo2.svg" class="logoLogin" href="#myPage"/>
+    <h1>Bienvenido</h1>
+  </div>
+  <div class="login-form">
+    <h3>Usuario:</h3>
+    <input type="text" placeholder="ejemplo@ucuenca.edu.ec" id="usr"/>
+    <h3>Contraseña:</h3>
+    <input type="password" placeholder="" id="pssw" onKeyPress="pulsar(event)"/>
+    <br>
+    <input type="button" value="Ingresar" id="button-ingresar" class="login-button" onClick="ingreso()"/>
+    <br>
+    <a class="sign-up" id="register">Registrarse!</a><br>
+    <label class="no-access" id="mensaje"></label>
+  </div>
+  	
+  </div>
+  
+ <footer class="text-center">
+  		<p>Derechos reservados <a href="https://www.ucuenca.edu.ec" data-toggle="tooltip" title="Visitanos">www.ucuenca.edu.ec</a></p> 
+</footer>
+<script>
+$(document).ready(function(){
+  // Initialize Tooltip
+  $('[data-toggle="tooltip"]').tooltip(); 
+  
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".login-header a, footer a[href='#myLogin']").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+})
+</script>
+
+</body>
+</html>
